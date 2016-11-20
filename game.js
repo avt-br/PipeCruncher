@@ -37,6 +37,11 @@ function add_score(partial){
   e.innerHTML = "" + (parseInt(e.innerHTML) + partial);
 }
 
+function set_score(partial){
+  var e = document.getElementById("score");
+  e.innerHTML = "" + partial;
+}
+
 function get_pipe_url(pipe_name, ext){
   if(!ext){
     ext = "png";
@@ -53,7 +58,7 @@ function get_pipe_index(element){
 
 function get_pipe_name(element){
   var url = element.style.background;
-  var re = /url\(\"Images\/pipe_(.*)\...."\).*/;
+  var re = /url\(\"?.*\/?Images\/pipe_(.*)\....\"?\).*/
   var match = re.exec(url);
   if(match){
     return match[1];
@@ -77,6 +82,8 @@ function index_to_pipe(idx1, idx2){
 }
 
 function new_game(){
+
+  set_score(0);
 
   //first column are the sources
   for(var i=0; i<nb_rows; ++i){
@@ -142,7 +149,7 @@ function destroy_pipes(elements, callback){
       set_pipe(e, "empty");
     });
     callback();
-  }, 400);
+  }, 450);
 }
 
 function are_pipes_adjacent(e1, e2){
@@ -344,9 +351,6 @@ function push_down_board(){
 document.addEventListener("DOMContentLoaded", function(event) { 
   new_game();
   document.getElementById("restart").addEventListener("click", new_game);
-  
-  document.getElementById("restart").addEventListener("click", new_game);
-
   document.querySelectorAll("#game_table td").forEach(function(e){
     e.addEventListener("click", function(el){rotate(e)})
   });
