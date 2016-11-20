@@ -351,7 +351,8 @@ function push_down_board(){
 document.addEventListener("DOMContentLoaded", function(event) { 
   new_game();
   document.getElementById("restart").addEventListener("click", new_game);
-  document.querySelectorAll("#game_table td").forEach(function(e){
-    e.addEventListener("click", function(el){rotate(e)})
-  });
+  cells = document.querySelectorAll("#game_table td");
+  for(var i=0; i<cells.length; ++i){
+    (cells[i]).addEventListener("click", function(ev){rotate(ev.currentTarget)});
+  }
 });
