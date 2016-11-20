@@ -1,0 +1,48 @@
+#game_table td{
+  width: 10%;
+  height: 10%;
+  background-color:green;
+}
+
+#game_table{ 
+  table-layout:fixed;
+  width: 80vw;
+  height: 65vw;
+  margin-left: 10vw;
+}
+
+.black_overlay{
+  background-color: rgba(0,0,0,0.72);
+  padding: 10px;
+  border-radius: 10px;
+  color:white;
+}
+
+#header{
+  height:80px;
+  margin: 0 0 80px 0;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: url("Images/ground.jpg");
+}
+
+#restart{
+  background-color: #669900;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+#restart:hover{
+  cursor:pointer;
+}
+
+#game_table td:hover{
+  cursor:pointer;
+  background-color: rgba(255,255,255,0.7) !important;
+}
+
+
+}
