@@ -270,14 +270,17 @@ function mark_connected_pipes(){
 
 function mark_has_water(e){
   e.style.filter = "hue-rotate(120deg)";
+  e.style.WebkitFilter = "hue-rotate(120deg)";
 }
 
 function mark_no_water(e){
   e.style.filter = "";
+  e.style.WebkitFilter = "";
 }
 
 function has_water(e){
-  return (e.style.filter == "hue-rotate(120deg)");
+  return (e.style.filter == "hue-rotate(120deg)") 
+          || (e.style.WebkitFilter == "hue-rotate(120deg)");
 }
 
 
