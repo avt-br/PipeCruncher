@@ -9,6 +9,9 @@
   width: 80vw;
   height: 65vw;
   margin-left: 10vw;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  max-height: 70vh;
 }
 
 .black_overlay{
@@ -28,14 +31,14 @@ body{
   background: url("https://s-media-cache-ak0.pinimg.com/236x/9a/1f/e2/9a1fe282ad6d12391828ae0ed4ed9a86.jpg");
 }
 
-#restart{
+.button{
   background-color: #669900;
   padding: 10px;
   border-radius: 10px;
-  margin: 10px 0;
+  margin: 0px !important;
 }
 
-#restart:hover{
+.button:hover{
   cursor:pointer;
 }
 
@@ -44,5 +47,27 @@ body{
   background-color: rgba(255,255,255,0.7) !important;
 }
 
+div.text_overlay{
+  height:40px;
+}
+div.text_overlay > h3{
+  margin-top: 12px;
+  margin-right: 10px;
+}
 
+#popup{
+  display:none;
+  position: fixed; 
+  width: 40vw;
+  height: auto;
+  margin-left: 25vw;
+  margin-top: 135px;
+}
+
+#popup_text{
+  text-align: center;
+}
+
+#popup_button{
+  text-align: center;
 }

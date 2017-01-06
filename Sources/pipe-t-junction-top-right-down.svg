@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="pipe-source-left.svg"
+   sodipodi:docname="pipe-t-junction-top-right-down.svg"
    inkscape:export-filename="/Users/pedrosantos/Desktop/PipeCruncher/Images/pipe_source_left.png"
    inkscape:export-xdpi="180"
    inkscape:export-ydpi="180">
@@ -159,7 +159,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
