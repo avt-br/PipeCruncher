@@ -12,6 +12,7 @@
   margin-top: 40px;
   margin-bottom: 40px;
   max-height: 70vh;
+  touch-action: none;
 }
 
 .black_overlay{
