@@ -245,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     (cells[i]).addEventListener("touchstart", function(ev){selector.onStartSelection(ev.currentTarget)});
     (cells[i]).addEventListener("touchmove", function(ev){
+      ev.preventDefault();
       var element = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
       if(element && board.elementToPipe(element)){
         selector.onPipeSelection(element)
