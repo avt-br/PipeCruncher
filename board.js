@@ -43,12 +43,14 @@ class Board {
   }
   elementToPipe(e){
     var coords = get_pipe_index(e);
-    return this.board[coords[0]][coords[1]];
+    if(coords){
+      return this.board[coords[0]][coords[1]];
+    }
+    return null;
   }
   elementToIndex(e){
     return get_pipe_index(e);
   }
-
   getPipePtr(e){
     return new PipePtr(this.elementToPipe(e), this.elementToIndex(e));
   }
@@ -58,5 +60,8 @@ function get_pipe_index(element){
   var id = element.id;
   var re = /idx_(\d+)_(\d+)/;
   var match = re.exec(id);
-  return [parseInt(match[1]), parseInt(match[2])];
+  if(match){
+    return [parseInt(match[1]), parseInt(match[2])];
+  }
+  return null;
 }

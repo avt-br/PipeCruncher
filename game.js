@@ -180,13 +180,13 @@ class PipeSelector{
     this.mouse_down = false;
     this.selected_pipes = [];
   }
-  onStartSelection(ev){
-    var thisPipePtr = board.getPipePtr(ev.currentTarget);
+  onStartSelection(el){
+    var thisPipePtr = board.getPipePtr(el);
     this.mouse_down = true;
     set_selected(thisPipePtr);
     this.selected_pipes.push(thisPipePtr);
   }
-  onPipeSelection(ev){
+  onPipeSelection(el){
 
     function containsPtr(vector, ptr)
     {
@@ -196,7 +196,7 @@ class PipeSelector{
       }
       return false;
     }
-    var thisPipePtr = board.getPipePtr(ev.currentTarget);
+    var thisPipePtr = board.getPipePtr(el);
     var lastPipePtr = this.selected_pipes[this.selected_pipes.length-1];
     if(this.mouse_down && this.selected_pipes.length > 0 
       && thisPipePtr.pipe.isPlay
@@ -207,7 +207,7 @@ class PipeSelector{
         this.selected_pipes.push(thisPipePtr);
     }
   }
-  onEndSelection(ev){
+  onEndSelection(){
     for(var i=0; i<this.selected_pipes.length; ++i){
       set_unselected(this.selected_pipes[i]);
     }
@@ -239,8 +239,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var cells = document.querySelectorAll("#game_table td");
   var selector = new PipeSelector();
   for(var i=0; i<cells.length; ++i){
-    (cells[i]).addEventListener("mousedown", function(ev){selector.onStartSelection(ev)});
-    (cells[i]).addEventListener("mouseover", function(ev){selector.onPipeSelection(ev)});
-    (cells[i]).addEventListener("mouseup", function(ev){selector.onEndSelection(ev)});
+    (cells[i]).addEventListener("mousedown", function(ev){selector.onStartSelection(ev.currentTarget)});
+    (cells[i]).addEventListener("mouseover", function(ev){selector.onPipeSelection(ev.currentTarget)});
+    (cells[i]).addEventListener("mouseup", function(){selector.onEndSelection()});
+
+    (cells[i]).addEventListener("touchstart", function(ev){selector.onStartSelection(ev.currentTarget)});
+    (cells[i]).addEventListener("touchmove", function(ev){
+      var element = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+      if(element && board.elementToPipe(element)){
+        selector.onPipeSelection(element)
+      }
+    });
+    (cells[i]).addEventListener("touchend", function(){selector.onEndSelection()});
   }
 });
