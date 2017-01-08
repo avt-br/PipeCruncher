@@ -67,13 +67,11 @@ function pointsObjective(nbPoints) {
 }
 
 
-class Level{
-  constructor(nbMoves, objective, generator, description){
+var Level = function(nbMoves, objective, generator, description){
     this.nbMoves = nbMoves;
     this.objective = objective;
     this.generator = generator;
     this.description = description;
-  }
 }
 
 var levels = [

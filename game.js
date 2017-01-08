@@ -175,21 +175,19 @@ function game_over(){
   popup("Game Over :(", "Restart", function(){ new_game(levels[activeLevel]); });
 }
 
-class PipeSelector{
-  constructor(){
-    this.mouse_down = false;
-    this.selected_pipes = [];
-  }
-  onStartSelection(el){
+var PipeSelector = function(){
+  this.mouse_down = false;
+  this.selected_pipes = [];
+
+  this.onStartSelection = function(el){
     var thisPipePtr = board.getPipePtr(el);
     this.mouse_down = true;
     set_selected(thisPipePtr);
     this.selected_pipes.push(thisPipePtr);
   }
-  onPipeSelection(el){
-
-    function containsPtr(vector, ptr)
-    {
+  
+  this.onPipeSelection = function(el){
+    function containsPtr(vector, ptr) {
       for(var i=0; i<vector.length; ++i) {
         if (vector[i].coords[0] == ptr.coords[0] 
          && vector[i].coords[1] == ptr.coords[1]) return true;
@@ -207,12 +205,12 @@ class PipeSelector{
         this.selected_pipes.push(thisPipePtr);
     }
   }
-  onEndSelection(){
+
+  this.onEndSelection = function(){
     for(var i=0; i<this.selected_pipes.length; ++i){
       set_unselected(this.selected_pipes[i]);
     }
-    if(this.selected_pipes.length >= 3)
-    {
+    if(this.selected_pipes.length >= 3) {
       destroy_pipes(this.selected_pipes, new_move);
     }
     this.mouse_down = false;

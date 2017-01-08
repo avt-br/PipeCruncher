@@ -1,70 +1,63 @@
-class PipeConnections{
-  constructor(top, bottom, left, right){
-    this.top = top;
-    this.bottom = bottom;
-    this.left = left;
-    this.right = right;
-  }
-}
-class PipePtr {
-  constructor(pipe, coords){
-    this.pipe = pipe;
-    this.coords = coords;
-  }
+var PipeConnections = function(top, bottom, left, right){
+  this.top = top;
+  this.bottom = bottom;
+  this.left = left;
+  this.right = right;
 }
 
-class Pipe {
-  constructor(sprite, connections, isStatic, isPlay, isTermination, insidePipe, pointsToDelete){
-    this.sprite = sprite;
-    this.connections = connections;
-    this.isStatic= isStatic;
-    this.isPlay = isPlay;
-    this.isTermination = isTermination;
-    this.insidePipe = insidePipe;
-    this.pointsToDelete = pointsToDelete;
-    this.isEmpty = false;
-  }
-  render(element){ 
+var PipePtr = function(pipe, coords){
+  this.pipe = pipe;
+  this.coords = coords;
+}
+
+var Pipe = function(sprite, connections, isStatic, isPlay, isTermination, insidePipe, pointsToDelete){
+  this.sprite = sprite;
+  this.connections = connections;
+  this.isStatic= isStatic;
+  this.isPlay = isPlay;
+  this.isTermination = isTermination;
+  this.insidePipe = insidePipe;
+  this.pointsToDelete = pointsToDelete;
+  this.isEmpty = false;
+
+  this.render =  function(element){ 
     var pipe_url = get_pipe_url(this.sprite);
     element.style.background = pipe_url;
     element.style.backgroundSize = "100%";
     element.style.backgroundRepeat = "no-repeat";
-  }
-  getConnection(){
-    return get_pipe_connections(e);
-  }
-  destroy(destructionPoints){
-    if (!this.isPlay) return false;
+  };
 
+  this.getConnection = function(){
+    return get_pipe_connections(e);
+  };
+  
+  this.destroy = function(destructionPoints){
+    if (!this.isPlay) return false;
     this.pointsToDelete -= destructionPoints;
     if (this.pointsToDelete > 0){
       return false;
     }
     return true;
-  }
+  };
 }
 
-class PlayPipe extends Pipe{
-  constructor(sprite){
-    super(sprite, get_pipe_connections(sprite), false, true, false, null, 0);
-  }
+var PlayPipe = function(sprite){
+  Pipe.call(this, sprite, get_pipe_connections(sprite), false, true, false, null, 0);
 }
 
-class StaticPipe extends Pipe{
-  constructor(sprite){
-    var connects = new PipeConnections(false, false, false, false);
-    super(sprite, connects, true, false, false, null, 0);
-  }
+var StaticPipe = function(sprite){
+  var connects = new PipeConnections(false, false, false, false);
+  Pipe.call(this, sprite, connects, true, false, false, null, 0);
 }
 
-class SinkPipe extends Pipe{
-  constructor(sprite, pointsToDelete){
-    var connects = new PipeConnections(true, true, true, true);
-    super(sprite, connects, true, true, true, null, pointsToDelete);
-    this.initialPoints = pointsToDelete;
-  }
-  render(element){ 
-    super.render(element);
+var SinkPipe = function (sprite, pointsToDelete){
+  var connects = new PipeConnections(true, true, true, true);
+  Pipe.call(this, sprite, connects, true, true, true, null, pointsToDelete);
+  this.initialPoints = pointsToDelete;
+
+  this.oldrender = this.render;
+  this.render = function(element){ 
+    this.oldrender(element);
     if(!this.isEmpty){
       var rotation = -90 * (this.initialPoints - this.pointsToDelete) / this.initialPoints;
       var filter = "hue-rotate("+rotation+"deg)";
@@ -74,10 +67,8 @@ class SinkPipe extends Pipe{
   }
 }
 
-class ObstaclePipe extends Pipe{
-  constructor(sprite, connections, insidePipe, nbPoints){
-    super(sprite, connections, true, true, true, insidePipe, nbPoints);
-  }
+var ObstaclePipe = function(sprite, connections, insidePipe, nbPoints){
+  Pipe.call(this, sprite, connections, true, true, true, insidePipe, nbPoints);
 }
 
 

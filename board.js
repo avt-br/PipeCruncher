@@ -1,6 +1,5 @@
-class Board {
+var Board  = function() {
 
-  constructor(){
     this.nb_rows = 9;
     this.nb_cols = 11;
     this.board = [
@@ -14,14 +13,13 @@ class Board {
       [null,null,null,null,null,null,null,null,null,null,null],
       [null,null,null,null,null,null,null,null,null,null,null] 
     ];
-  }
 
-  setPipe(i,j, pipe){
+  this.setPipe = function(i,j, pipe){
     this.board[i][j] = pipe;
     this.renderPipe(i,j);
   }
 
-  getPipe(i,j){
+  this.getPipe = function (i,j){
     var pi0 = this.board[i];
     if (pi0){
       return pi0[j];
@@ -29,31 +27,35 @@ class Board {
     return null;
   }
 
-  renderPipe(i,j){
+  this.renderPipe = function(i,j) {
     var element = index_to_pipe(i,j);
     this.board[i][j].render(element);
   }
 
-  renderBoard(){
+  this.renderBoard = function(){
     for(var i=0; i<this.nb_rows; ++i){
       for(var j=0; j<this.nb_cols; ++j){
         this.renderPipe(i,j);
       }
     }
   }
-  elementToPipe(e){
+
+  this.elementToPipe = function(e){
     var coords = get_pipe_index(e);
     if(coords){
       return this.board[coords[0]][coords[1]];
     }
     return null;
   }
-  elementToIndex(e){
+  
+  this.elementToIndex = function(e){
     return get_pipe_index(e);
   }
-  getPipePtr(e){
+
+  this.getPipePtr = function(e){
     return new PipePtr(this.elementToPipe(e), this.elementToIndex(e));
   }
+
 }
 
 function get_pipe_index(element){

@@ -64,7 +64,7 @@ div.text_overlay > h3{
   height: auto;
   margin-left: 25vw;
   margin-top: 135px;
-  z-index = 999;
+  z-index = 9999;
 }
 
 #popup_text{
